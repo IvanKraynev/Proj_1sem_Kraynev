@@ -2,22 +2,40 @@
 # Найти значение выражения X - X3/3 + X5/5 - ... + (-1)NX2N +1/(2N +1).
 # Полученное число является приближенным значением функции arctg в точке X.
 
-import math
-
 x = float(input('Введите вещественное число: '))
 n = int(input('Введите целое число: '))
 
-while type(x) != float:                        # обработка исключений
+x = input("Введите число x: ")
+while type(x) != float:                                 # обработка исключений
     try:
         x = float(x)
     except ValueError:
-        print("Неправильно ввели!")
+        print("Введите снова!")
         x = input("Введите вещественное число: ")
-
-while type(n) != int:                          # обработка исключений
+while abs(x) >= 1:                                      # обработка исключений
+    x = input("Введите число меньше единицы по модулю: ")
+while type(x) != float:
+    try:
+        x = float(x)
+    except ValueError:
+        print("Введите снова!")
+        x = input("Введите вещественное число: ")
+while type(n) != int:                                   # обработка исключений
     try:
         n = int(n)
     except ValueError:
         print("Неправильно ввели!")
         n = input("Введите целое число: ")
+
+i = 2                                          # степень числа
+sum = 0
+while n > 0:
+    m = x ** (2 * n + 1) / (2 * n + 1)         # основное действие
+    m *= (-1) ** i
+    sum += m
+    n -= 1
+    i += 1
+sum *= (-1) ** n
+x = x + sum
+print(x)
 
